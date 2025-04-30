@@ -42,12 +42,11 @@ public class TimeTableService {
                 if(user.get().getRole()== Constants.Role.ADMIN) {
                     timeTable.setStartDate(LocalDate.parse(timeTable.getStartDateInput(), dateFormat));
                     timeTable.setEndDate(LocalDate.parse(timeTable.getEndDateInput(), dateFormat));
-                    int daysInSem = timeTable.getEndDate().getDayOfYear()-timeTable.getStartDate().getDayOfYear();                    for (Map.Entry<DayOfWeek, List<TimeTableEntry>> entry : timeTable.getElemList().entrySet()) {
+                    int daysInSem = timeTable.getEndDate().getDayOfYear()-timeTable.getStartDate().getDayOfYear();
+                    for (Map.Entry<DayOfWeek, List<TimeTableEntry>> entry : timeTable.getElemList().entrySet()) {
                         List<TimeTableEntry> timeTableEntries = entry.getValue();
                         for (TimeTableEntry timeTableEntry : timeTableEntries) {
                             timeTableEntry.setId(UUID.randomUUID());
-                            timeTableEntry.setFromTime(LocalTime.parse(timeTableEntry.getFromTimeInput(), timeFormat));
-                            timeTableEntry.setToTime(LocalTime.parse(timeTableEntry.getToTimeInput(), timeFormat));
                             timeTableEntry.setIsAvailable(new boolean[daysInSem]);
                             Arrays.fill(timeTableEntry.getIsAvailable(), true);                        }
                     }
