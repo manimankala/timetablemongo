@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: TimeTable
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: timetable
+
+server:
+  port: 8090
