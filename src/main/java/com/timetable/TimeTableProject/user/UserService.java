@@ -38,7 +38,6 @@ public class UserService {
         if(userRepo.findByEmail(user.getContactDetails().getEmail()) != null) {
             throw new RuntimeException("User already exists");
         }
-        userRepo.save(user);
         String[] name=user.getName().split(" ");
         String defPas = name[0] + "@" + user.getContactDetails().getPhone().substring(6, 10);
         loginDetails.setUserId(user.getId());
@@ -46,7 +45,7 @@ public class UserService {
         loginDetails.setPassword(passwordEncoder.encode(defPas));
         loginDetails.setRole(user.getRole());
         loginDetailsRepo.save(loginDetails);
-        return user;
+        return  userRepo.save(user);
     }
 
     public String updateUser(User user) {
